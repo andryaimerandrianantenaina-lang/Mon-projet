@@ -196,4 +196,21 @@ width:100%;
 margin-top:20px;
 }
 
+.contact-list {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  font-size: 28px;
+}
+
+.contact-list a {
+  color: #333;
+  transition: 0.3s;
+}
+
+.contact-list a:hover {
+  color: #0077b5;
+  transform: scale(1.2);
+}
+
 }
