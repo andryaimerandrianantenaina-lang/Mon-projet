@@ -68,12 +68,6 @@ padding:6px 0;
 color:#444;
 }
 
-li::before{
-content:"✓ ";
-color:#2a5298;
-font-weight:bold;
-}
-
 .info-section{
 display:flex;
 justify-content:space-between;
