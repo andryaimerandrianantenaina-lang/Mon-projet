@@ -77,4 +77,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
     skillContainers.forEach(el => observer.observe(el));
 });
-};
