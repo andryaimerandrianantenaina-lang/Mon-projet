@@ -45,7 +45,6 @@ h2 { color: #2a5298; margin-top: 30px; border-left: 5px solid #2a5298; padding-l
 }
 .photo img:hover { transform: scale(1.05); }
 
-/* 5. Compétences (Skills) */
 .skill { margin-bottom: 15px; }
 .skill-bar { background: #ddd; border-radius: 20px; overflow: hidden; }
 .skill-level {
@@ -56,11 +55,9 @@ h2 { color: #2a5298; margin-top: 30px; border-left: 5px solid #2a5298; padding-l
 .css { width: 60%; background: #264de4; }
 .python { width: 25%; background: #3776ab; }
 
-/* 6. Animations */
 @keyframes loadSkill { from { width: 0; } }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-/* 7. Mobile (Responsive) */
 @media (max-width: 768px) {
     .container { width: 90%; padding: 20px; }
     .info-section { flex-direction: column; text-align: center; }
