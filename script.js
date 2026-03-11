@@ -1,37 +1,80 @@
 
 const sections = document.querySelectorAll(".section");
+const topBtn = document.getElementById("topBtn");
+const skillContainers = document.querySelectorAll(".skill-container");
 
 window.addEventListener("scroll", () => {
+    sections.forEach(section => {
+        const position = section.getBoundingClientRect().top;
+        if (position < window.innerHeight - 100) {
+            section.classList.add("visible");
+        }
+    });
 
-sections.forEach(section => {
-
-const position = section.getBoundingClientRect().top;
-const screen = window.innerHeight;
-
-if(position < screen - 100){
-section.classList.add("visible");
-}
-
+    
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        topBtn.style.display = "block";
+    } else {
+        topBtn.style.display = "none";
+    }
 });
 
+topBtn.addEventListener("click", () => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 });
 
+const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const bar = entry.target.querySelector('.progress-bar-fill');
+            bar.style.width = bar.getAttribute('data-width');
+            obs.unobserve(entry.target); 
+        }
+    });
+}, { threshold: 0.5 });
 
-const topBtn = document.getElementById("topBtn");
+skillContainers.forEach(el => observer.observe(el));
+document.addEventListener("DOMContentLoaded", () => {
+    const sections = document.querySelectorAll(".section");
+    const topBtn = document.getElementById("topBtn");
+    const skillContainers = document.querySelectorAll(".skill-container");
 
-window.onscroll = function(){
+    window.addEventListener("scroll", () => {
+        sections.forEach(section => {
+            const position = section.getBoundingClientRect().top;
+            if (position < window.innerHeight - 100) {
+                section.classList.add("visible");
+            }
+        });
+        
+        if (topBtn) {
+            if (window.scrollY > 200) {
+                topBtn.style.display = "block";
+            } else {
+                topBtn.style.display = "none";
+            }
+        }
+    });
 
-if(document.body.scrollTop > 200 || document.documentElement.scrollTop > 200){
-topBtn.style.display = "block";
-}else{
-topBtn.style.display = "none";
-}
+    if (topBtn) {
+        topBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    }
+    
+    const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const bar = entry.target.querySelector('.progress-bar-fill');
+                bar.style.width = bar.getAttribute('data-width');
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
 
-};
-
-topBtn.onclick = function(){
-window.scrollTo({
-top:0,
-behavior:"smooth"
+    skillContainers.forEach(el => observer.observe(el));
 });
 };
