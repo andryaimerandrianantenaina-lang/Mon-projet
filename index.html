@@ -105,6 +105,111 @@
     </div>
   </div>
 
+<style>
+    .dashboard-container {
+        background-color: #7AA6B3;
+        padding: 20px; 
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        font-family: 'Segoe UI', sans-serif;
+        max-width: 100%; 
+    }
+    
+    .formula {
+        font-family: 'Courier New', monospace;
+        font-size: 1.5rem; 
+        color: #0A122A;
+        margin-bottom: 20px;
+        background: #E7DECD;
+        padding: 10px 20px;
+        border-radius: 8px;
+    }
+
+    .cages { 
+        display: flex; 
+        gap: 3px; 
+        perspective: 1000px; 
+    }
+
+    .cage {
+        width: 35px; 
+        height: 40px; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center;
+        border-radius: 6px; 
+        font-weight: bold; 
+        font-size: 1rem; 
+        background: white; 
+        border: 2px solid #804E49;
+        transition: transform 0.8s ease-in-out, background 0.7s;
+        transform-style: preserve-3d;
+    }
+
+    .cage.active { background: #698F3F; color: white; border-color: #698F3F; }
+
+    .rotate-gear { transform: rotateX(180deg); }
+
+    .btn-increment {
+        margin-top: 25px;
+        padding: 10px 20px;
+        background: #0A122A;
+        color: white;
+        border: none; 
+        border-radius: 8px;
+        cursor: pointer; 
+        font-weight: bold;
+    }
+</style>
+          
+<div class="section">
+    <h2>Projet</h2>
+    <p>Je voulait met en avant mon petit algorythme que j'ai crée grace à Html,css et javaScript</p>
+    <p>Ce concept visualise comment les ordinateur represent les chiffre en base decimal en base binaire</p>
+<div class="dashboard-container">
+    <h3 id="display-formula" class="formula">00000000 = 0</h3>
+    <div class="cages" id="cages-wrapper"></div>
+    <button class="btn-increment" onclick="increment()">Cliquer pour ajouter plus 1 nombre</button>
+</div>
+
+<script>
+    let decimalValue = 0;
+    const wrapper = document.getElementById('cages-wrapper');
+    
+    for(let i=0; i<8; i++) {
+        let div = document.createElement('div');
+        div.className = 'cage';
+        div.id = `cage-${i}`;
+        div.innerText = '0';
+        wrapper.appendChild(div);
+    }
+
+    async function increment() {
+        let oldBinary = decimalValue.toString(2).padStart(8, '0');
+        decimalValue++;
+        let newBinary = decimalValue.toString(2).padStart(8, '0');
+        document.getElementById('display-formula').innerText = `${newBinary} = ${decimalValue}`;
+
+        for (let i = 0; i < 8; i++) {
+            let cage = document.getElementById(`cage-${i}`);
+            if (oldBinary[i] !== newBinary[i]) {
+                setTimeout(() => {
+                    cage.classList.add('rotate-gear');
+                    setTimeout(() => {
+                        cage.innerText = newBinary[i];
+                        cage.className = newBinary[i] === '1' ? 'cage active' : 'cage';
+                    }, 400);
+                    setTimeout(() => cage.classList.remove('rotate-gear'), 800);
+                }, (7 - i) * 200);
+            }
+        }
+    }
+</script>
+
+
   <section id="contact">
     <h2>Contact</h2>
     <ul class="contact-list">
@@ -118,4 +223,4 @@
 </div>
 
 </body>
-  </html>
+          </html>
